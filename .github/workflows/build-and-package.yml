@@ -43,7 +43,7 @@ jobs:
         run: tar -czvf $PACKAGE_NAME -C dist .
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.BRANCH_NAME }}-package
           path: ${{ env.PACKAGE_NAME }}
