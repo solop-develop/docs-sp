@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="https://ayuda.solopapp.com/rss.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <atom:link href="https://ayuda.solopapp.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <title></title>
+    <link>https://ayuda.solopapp.com/</link>
+    <description>Página oficial de documentación Solop ERP</description>
+    <language>es-ES</language>
+    <pubDate>Thu, 16 Oct 2025 15:56:34 GMT</pubDate>
+    <lastBuildDate>Thu, 16 Oct 2025 15:56:34 GMT</lastBuildDate>
+    <generator>vuepress-plugin-feed2</generator>
+    <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+  </channel>
+</rss>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="https://ayuda.solopapp.com/atom.xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es-ES">
+  <id>https://ayuda.solopapp.com/</id>
+  <title/>
+  <subtitle>Página oficial de documentación Solop ERP</subtitle>
+  <updated>2025-10-16T15:56:34.125Z</updated>
+  <generator>vuepress-plugin-feed2</generator>
+  <link rel="self" href="https://ayuda.solopapp.com/atom.xml"/>
+  <link rel="alternate" href="https://ayuda.solopapp.com/"/>
+</feed>
