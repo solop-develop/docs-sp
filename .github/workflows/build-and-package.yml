@@ -52,6 +52,6 @@ jobs:
           secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           space_name: 'docs-sp'
           space_region: 'nyc3'
-          source: $PACKAGE_NAME
+          source: ${{ env.PACKAGE_NAME }}
           out_dir: 'html/'
 
