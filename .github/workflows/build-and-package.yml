@@ -39,10 +39,16 @@ jobs:
           NODE_OPTIONS: --max_old_space_size=8192
         run: pnpm run build:webpack
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+      - name: Compress Build Output (tar.gz)
+        run: tar -czvf $PACKAGE_NAME -C dist .
+
+      - name: Upload site pack to S3
+        uses: BetaHuhn/do-spaces-action@v2
         with:
-          name: ${{ env.BRANCH_NAME }}-package
-          path: dist
-          overwrite: true
+          access_key: ${{ vars.AWS_ACCESS_KEY_ID}}
+          secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          space_name: 'docs-sp'
+          space_region: 'nyc3'
+          source: $PACKAGE_NAME
+          out_dir: 'html/'
 
