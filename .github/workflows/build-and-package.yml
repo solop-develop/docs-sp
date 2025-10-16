@@ -42,9 +42,6 @@ jobs:
       - name: Compress Build Output (tar.gz)
         run: tar -czvf $PACKAGE_NAME -C dist .
 
-      - name: Listar archivos en el directorio de trabajo
-        run: ls -al
-
       - name: Upload site pack to S3
         uses: BetaHuhn/do-spaces-action@v2
         with:
