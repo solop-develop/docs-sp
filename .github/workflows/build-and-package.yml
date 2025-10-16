@@ -54,4 +54,5 @@ jobs:
           space_region: 'nyc3'
           source: ${{ env.PACKAGE_NAME }}
           out_dir: 'html/'
+          overwrite: true
 
