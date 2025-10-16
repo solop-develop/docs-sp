@@ -39,14 +39,10 @@ jobs:
           NODE_OPTIONS: --max_old_space_size=8192
         run: pnpm run build:webpack
 
-      - name: Compress Build Output (tar.gz)
-        run: tar -czvf $PACKAGE_NAME -C dist .
-
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.BRANCH_NAME }}-package
-          path: ${{ env.PACKAGE_NAME }}
+          path: dist
           overwrite: true
-          compression-level: 0
 
