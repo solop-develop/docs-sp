@@ -101,7 +101,7 @@ jobs:
           DO_SPACE_REGION: nyc3 
       
       - name: show-directory
-        cmd: ls -alh s3-downloads
+        run: ls -alh s3-downloads
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
