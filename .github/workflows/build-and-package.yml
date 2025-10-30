@@ -55,8 +55,8 @@ jobs:
 
   check-digitalocean-secrets:
     name: Check if Digitalocean registry information was set on secrets
-    needs:
-      - build-and-package
+    #needs:
+    #  - build-and-package
     runs-on: ubuntu-latest
     outputs:
       is_have_secrets: ${{ steps.check_digitalocean_secrets_job.outputs.is_have_secrets }}
