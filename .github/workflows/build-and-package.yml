@@ -85,12 +85,27 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Configure AWS Credentials for S3 Access
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID}}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1 
+      - name: Install AWS CLI
+        uses: aws-actions/setup-aws-cli@v4
+
+      - name: Configure and Download from DigitalOcean Spaces
+        run: |
+          # 1. Configurar las credenciales y el endpoint de DigitalOcean
+          # La clave secreta y el ID se toman de los secretos/variables de GitHub
+          aws configure set aws_access_key_id ${{ vars.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          
+          # ¡Paso crucial! Configurar el endpoint para apuntar a la región de DO
+          aws configure set default.s3.endpoint_url https://${{ env.DO_SPACE_REGION }}.digitaloceanspaces.com
+          
+          # 2. Crear una carpeta local para guardar los archivos
+          mkdir -p s3-downloads
+          
+          # 3. Sincronizar (Descargar) el contenido del Space (Bucket) al directorio local
+          # El nombre del Space es 'docs-sp' y la carpeta es 'html/'
+          aws s3 sync s3://docs-sp/html/ s3-downloads/ --recursive
+        env:
+          DO_SPACE_REGION: nyc3
 
       - name: Download all tar.gz files from S3/Spaces
         run: |
