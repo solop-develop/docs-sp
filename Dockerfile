@@ -10,6 +10,9 @@ WORKDIR /tmp
 # Copiar todos los archivos tar.gz descargados de S3
 COPY s3-downloads/*.tar.gz /tmp/
 
+# Copiar configuración personalizada de nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Descomprimir archivos tar.gz
 # Si existe el archivo de la rama principal, se descomprime en la raíz
 # Los demás se descomprimen en sus propios directorios
