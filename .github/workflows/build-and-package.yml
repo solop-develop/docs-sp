@@ -90,15 +90,16 @@ jobs:
 
       - name: Configure and Download from DigitalOcean Spaces
         run: |
-          aws configure set aws_access_key_id ${{ vars.AWS_ACCESS_KEY_ID }}
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          
-          aws configure set default.s3.endpoint_url https://${{ env.DO_SPACE_REGION }}.digitaloceanspaces.com
-          
           mkdir -p s3-downloads
-          
-          aws s3 sync s3://docs-sp/html/ s3-downloads/ --recursive
+
+          # Descargar todos los paquetes comprimidos desde DigitalOcean Spaces
+          aws s3 sync s3://docs-sp/html/ s3-downloads/ \
+            --endpoint-url https://${{ env.DO_SPACE_REGION }}.digitaloceanspaces.com \
+            --recursive
         env:
+          AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1
           DO_SPACE_REGION: nyc3
       
       - name: show-directory
