@@ -117,5 +117,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: tu_usuario/tu_repo:nginx-deploy
+          tags: registry.digitalocean.com/spuy/docs-md:main
           file: ./Dockerfile
