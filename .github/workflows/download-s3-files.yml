@@ -1,0 +1,53 @@
+name: Download S3 Files
+
+on:
+  push:
+    branches:
+      - '**'  # Se ejecuta en cualquier rama
+
+jobs:
+  download-from-s3:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Configure AWS CLI for DigitalOcean Spaces
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Región requerida por AWS CLI, aunque no se usa con DO Spaces
+
+      - name: Create download directory
+        run: mkdir -p downloaded-files
+
+      - name: Download files from DigitalOcean Spaces
+        env:
+          AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          echo "Descargando archivos de docs-sp/html..."
+          aws s3 sync \
+            s3://docs-sp/html/ \
+            downloaded-files/ \
+            --endpoint-url https://nyc3.digitaloceanspaces.com \
+            --no-progress
+
+      - name: List downloaded files
+        run: |
+          echo "=========================================="
+          echo "Archivos descargados:"
+          echo "=========================================="
+          ls -lh downloaded-files/
+          echo ""
+          echo "=========================================="
+          echo "Archivos .tar.gz encontrados:"
+          echo "=========================================="
+          find downloaded-files/ -name "*.tar.gz" -type f -exec ls -lh {} \;
+          echo ""
+          echo "=========================================="
+          echo "Total de archivos descargados:"
+          echo "=========================================="
+          find downloaded-files/ -type f | wc -l
