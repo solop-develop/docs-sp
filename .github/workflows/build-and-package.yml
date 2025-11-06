@@ -81,7 +81,7 @@ jobs:
       - check-digitalocean-secrets
     if: needs.check-digitalocean-secrets.outputs.is_have_secrets == 'true'
     env:
-      DEFAULT_BRANCH: main
+      DEFAULT_BRANCH: feature-1636-pack-doc
     steps:
 
       - name: Checkout Repository
