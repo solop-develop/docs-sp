@@ -8,57 +8,57 @@ on:
       - '*'
 
 jobs:
-#  build-and-package:
-#    runs-on: ubuntu-latest
-#
-#    env:
-#      BRANCH_NAME: ${{ github.ref_name }}
-#      PACKAGE_NAME: docs-sp-${{ github.ref_name }}.tar.gz
-#
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#        with:
-#          submodules: true
-#          fetch-depth: 0
-#
-#      - name: Install pnpm
-#        uses: pnpm/action-setup@v4
-#        with:
-#          version: 9.1.1
-#
-#      - name: Setup Node.js
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: 20
-#          cache: pnpm
-#
-#      - name: Install Deps
-#        run: pnpm install --no-frozen-lockfile
-#
-#      - name: Build Blog
-#        env:
-#          NODE_OPTIONS: --max_old_space_size=8192
-#        run: pnpm run build:webpack
-#
-#      - name: Compress Build Output (tar.gz)
-#        run: tar -czvf $PACKAGE_NAME -C dist .
-#
-#      - name: Upload site pack to S3
-#        uses: BetaHuhn/do-spaces-action@v2
-#        with:
-#          access_key: ${{ vars.AWS_ACCESS_KEY_ID}}
-#          secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#          space_name: 'docs-sp'
-#          space_region: 'nyc3'
-#          source: ${{ env.PACKAGE_NAME }}
-#          out_dir: 'html/'
-#          overwrite: true
+  build-and-package:
+    runs-on: ubuntu-latest
+
+    env:
+      BRANCH_NAME: ${{ github.ref_name }}
+      PACKAGE_NAME: docs-sp-${{ github.ref_name }}.tar.gz
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.1.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install Deps
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build Blog
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+        run: pnpm run build:webpack
+
+      - name: Compress Build Output (tar.gz)
+        run: tar -czvf $PACKAGE_NAME -C dist .
+
+      - name: Upload site pack to S3
+        uses: BetaHuhn/do-spaces-action@v2
+        with:
+          access_key: ${{ vars.AWS_ACCESS_KEY_ID}}
+          secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          space_name: 'docs-sp'
+          space_region: 'nyc3'
+          source: ${{ env.PACKAGE_NAME }}
+          out_dir: 'html/'
+          overwrite: true
 
   check-digitalocean-secrets:
     name: Check if Digitalocean registry information was set on secrets
-    # needs:
-    #   - build-and-package
+    needs:
+      - build-and-package
     runs-on: ubuntu-latest
     outputs:
       is_have_secrets: ${{ steps.check_digitalocean_secrets_job.outputs.is_have_secrets }}

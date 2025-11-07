@@ -1,0 +1,29 @@
+services:
+  docs-sp-nginx:
+    image: registry.digitalocean.com/spuy/docs-sp:main
+    container_name: docs-sp-nginx
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+    environment:
+      TZ: America/Montevideo
+      VIRTUAL_HOST: "*.${GENERAL_VIRTUAL_HOST}"
+      VIRTUAL_PORT: 80
+      LETSENCRYPT_HOST: "*.${GENERAL_VIRTUAL_HOST}"
+      LETSENCRYPT_EMAIL: test@solopcloud.com
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - private_network
+      - shared_network
+
+networks:
+  shared_network:
+    name: ${DEFAULT_NETWORK}
+    external: ${IS_EXTERNAL_NETWORK}
+  private_network:
+    name: docs1.network
