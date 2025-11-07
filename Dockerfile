@@ -3,11 +3,9 @@ FROM nginx:stable
 
 # Argumentos para configuración
 ARG DEFAULT_BRANCH=main
-ARG MAIN_DOMAIN=docs1.dev.solopcloud.com
 
 # Convertir los ARGs en variables de entorno
 ENV DEFAULT_BRANCH=${DEFAULT_BRANCH}
-ENV MAIN_DOMAIN=${MAIN_DOMAIN}
 
 # Crear directorio temporal para los archivos comprimidos
 WORKDIR /tmp
