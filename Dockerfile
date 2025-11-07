@@ -18,11 +18,10 @@ RUN echo "=== Configuración ===" && \
     echo "" && \
     echo "Generando configuración de nginx dinámicamente..." && \
     # Iniciar el archivo de configuración
-    cat > /etc/nginx/conf.d/default.conf << 'EOF_HEADER'
+    cat > /etc/nginx/conf.d/default.conf <<'EOF_HEADER' && \
 # Configuración generada dinámicamente para subdominios
 
 EOF_HEADER
-    && \
     # Procesar cada archivo tar.gz
     for file in /tmp/*.tar.gz; do \
         if [ -f "$file" ]; then \
