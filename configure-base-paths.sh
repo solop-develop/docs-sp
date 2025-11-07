@@ -1,13 +1,18 @@
 #!/bin/bash
 set -e
 
-DEFAULT_BRANCH="${DEFAULT_BRANCH:-main}"
+# La variable DEFAULT_BRANCH debe ser pasada como variable de entorno
+if [ -z "$DEFAULT_BRANCH" ]; then
+    echo "ERROR: DEFAULT_BRANCH no está definida"
+    exit 1
+fi
 
 echo "=== Configurando base paths para cada directorio ==="
 echo "DEFAULT_BRANCH: ${DEFAULT_BRANCH}"
 echo ""
 
 # Procesar cada archivo tar.gz descargado
+# TODAS las ramas van a subdirectorios (incluyendo la principal)
 for file in /tmp/*.tar.gz; do
     if [ -f "$file" ]; then
         filename=$(basename "$file")
@@ -17,14 +22,13 @@ for file in /tmp/*.tar.gz; do
 
         echo "Procesando: $branch"
 
-        # Determinar el base path para esta rama
+        # TODAS las ramas van a su propio subdirectorio
+        BASE_PATH="/${branch}/"
+        TARGET_DIR="/usr/share/nginx/html/${branch}"
+
         if [ "$branch" = "${DEFAULT_BRANCH}" ]; then
-            BASE_PATH="/"
-            TARGET_DIR="/usr/share/nginx/html"
-            echo "  -> Base path: / (raíz - rama principal)"
+            echo "  -> Base path: ${BASE_PATH} (rama principal)"
         else
-            BASE_PATH="/${branch}/"
-            TARGET_DIR="/usr/share/nginx/html/${branch}"
             echo "  -> Base path: ${BASE_PATH}"
         fi
 
@@ -53,6 +57,26 @@ for file in /tmp/*.tar.gz; do
     fi
 done
 
+# Crear redirección 301 en la raíz hacia la rama principal
+echo "=== Creando redirección en raíz ==="
+cat > /usr/share/nginx/html/index.html << EOF
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0;url=/${DEFAULT_BRANCH}/">
+    <link rel="canonical" href="/${DEFAULT_BRANCH}/" />
+    <title>Redireccionando...</title>
+</head>
+<body>
+    <p>Redireccionando a <a href="/${DEFAULT_BRANCH}/">/${DEFAULT_BRANCH}/</a>...</p>
+    <script>window.location.replace("/${DEFAULT_BRANCH}/");</script>
+</body>
+</html>
+EOF
+echo "  -> Redirección creada: / → /${DEFAULT_BRANCH}/"
+
+echo ""
 echo "=== Estructura de directorios final ==="
 ls -la /usr/share/nginx/html/
 echo ""

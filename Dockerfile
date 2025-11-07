@@ -1,8 +1,8 @@
 # Usar la última versión estable de nginx
 FROM nginx:stable
 
-# Argumentos para configuración
-ARG DEFAULT_BRANCH=main
+# Argumentos para configuración (debe ser pasado desde el build)
+ARG DEFAULT_BRANCH
 
 # Convertir los ARGs en variables de entorno
 ENV DEFAULT_BRANCH=${DEFAULT_BRANCH}

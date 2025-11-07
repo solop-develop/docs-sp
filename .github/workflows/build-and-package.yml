@@ -7,6 +7,10 @@ on:
     tags:
       - '*'
 
+env:
+  # Rama principal del proyecto - modificar aquí para cambiar la rama por defecto
+  DEFAULT_BRANCH: feature-1636-pack-doc
+
 jobs:
   build-and-package:
     runs-on: ubuntu-latest
@@ -39,6 +43,8 @@ jobs:
       - name: Build Blog
         env:
           NODE_OPTIONS: --max_old_space_size=8192
+          BRANCH_NAME: ${{ github.ref_name }}
+          DEFAULT_BRANCH: ${{ env.DEFAULT_BRANCH }}
         run: pnpm run build:webpack
 
       - name: Compress Build Output (tar.gz)
@@ -82,8 +88,6 @@ jobs:
     needs:
       - check-digitalocean-secrets
     if: needs.check-digitalocean-secrets.outputs.is_have_secrets == 'true'
-    env:
-      DEFAULT_BRANCH: feature-1636-pack-doc-2
     steps:
 
       - name: Checkout Repository
