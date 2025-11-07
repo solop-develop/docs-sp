@@ -3,13 +3,13 @@ name: Deploy blog
 on:
   push:
     branches:
-      - feature*
+      - *
     tags:
       - '*'
 
 env:
   # Rama principal del proyecto - modificar aquí para cambiar la rama por defecto
-  DEFAULT_BRANCH: v1636-2
+  DEFAULT_BRANCH: main
 
 jobs:
   build-and-package:
