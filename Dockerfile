@@ -22,6 +22,7 @@ RUN echo "=== Configuración ===" && \
 # Configuración generada dinámicamente para subdominios
 
 EOF_HEADER
+    && \
     # Procesar cada archivo tar.gz
     for file in /tmp/*.tar.gz; do \
         if [ -f "$file" ]; then \
