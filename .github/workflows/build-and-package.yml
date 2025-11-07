@@ -82,6 +82,9 @@ jobs:
     needs:
       - check-digitalocean-secrets
     if: needs.check-digitalocean-secrets.outputs.is_have_secrets == 'true'
+    env:
+      DEFAULT_BRANCH: feature-1636-pack-doc-2
+      MAIN_DOMAIN: docs1.dev.solopcloud.com
     steps:
 
       - name: Checkout Repository
@@ -122,3 +125,6 @@ jobs:
           push: true
           tags: ${{ vars.DIGITALOCEAN_REGISTRY }}/${{ vars.DOCKER_REPO_DOCS_SP }}:main
           file: ./Dockerfile
+          build-args: |
+            DEFAULT_BRANCH=${{ env.DEFAULT_BRANCH }}
+            MAIN_DOMAIN=${{ env.MAIN_DOMAIN }}
