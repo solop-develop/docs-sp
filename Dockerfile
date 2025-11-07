@@ -13,13 +13,16 @@ WORKDIR /tmp
 # Copiar todos los archivos tar.gz descargados de S3
 COPY s3-downloads/*.tar.gz /tmp/
 
-# Copiar el script de generación de configuración
-COPY generate-nginx-config.sh /tmp/generate-nginx-config.sh
+# Copiar configuración estática de nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copiar el script de configuración de base paths
+COPY configure-base-paths.sh /tmp/configure-base-paths.sh
 
 # Dar permisos de ejecución y ejecutar el script
-RUN chmod +x /tmp/generate-nginx-config.sh && \
-    /tmp/generate-nginx-config.sh && \
-    rm /tmp/generate-nginx-config.sh
+RUN chmod +x /tmp/configure-base-paths.sh && \
+    /tmp/configure-base-paths.sh && \
+    rm /tmp/configure-base-paths.sh
 
 # Exponer el puerto 80
 EXPOSE 80
