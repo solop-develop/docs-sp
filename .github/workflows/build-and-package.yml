@@ -9,7 +9,7 @@ on:
 
 env:
   # Rama principal del proyecto - modificar aquí para cambiar la rama por defecto
-  DEFAULT_BRANCH: feature-1636-pack-doc
+  DEFAULT_BRANCH: v1636-2
 
 jobs:
   build-and-package:
