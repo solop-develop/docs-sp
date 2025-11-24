@@ -29,7 +29,8 @@ Define la configuración necesaria para utilizar el servicio de impresión local
 
 1. El instalador queda disponible en para descargar
 
-https://solop.nyc3.digitaloceanspaces.com/public/downloads/ERP-App-Service-2.0.1-win-x64.exe
+* https://solop.nyc3.digitaloceanspaces.com/public/downloads/ERP-App-Service-2.0.2-win-x64.exe
+* https://solop.nyc3.digitaloceanspaces.com/public/downloads/ERP-App-Service-2.0.2-win-x86.exe
 
 2. Se ejecuta el instalador y se avanza en la instalación, donde solicite información referente a kafka se deja sin configurar y el tipo de conexión debe cambiarse a https
 
