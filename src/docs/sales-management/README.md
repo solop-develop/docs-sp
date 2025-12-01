@@ -33,5 +33,6 @@ Esta documentación está destinada a definir cada uno de los procedimientos par
 
 - [Orden de Venta](sales-orders/order)
 - [Propuesta](sales-orders/proposal)
+- [Oportunidades](sales-orders/opportunities)
 - [Tipos de Documentos](sales-orders/document-type)
 - [Reportes de Órdenes](../purchase-management/order-reports)
