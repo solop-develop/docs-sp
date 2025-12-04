@@ -1,10 +1,14 @@
 name: Deploy blog
 
+permissions:
+  contents: write # to upload release assets
+  packages: write # to publish packages
+
 on:
   push:
     branches:
-      - main
-      - experimental
+      - main # only `main` / `master` branch
+      # - experimental
 
 jobs:
   deploy-gh-pages:
