@@ -157,7 +157,11 @@ Mensaje del Sistema: Tiempo de gracia excedido, por favor cargue su tiempo de tr
 ## Resumen
 
 ✔ Control de mínimo diario al modificar horas
+
 ✔ Bloqueo al intentar cargar días posteriores si existen días incompletos
+
 ✔ Fecha sugerida = último registro + 1 día (o sugiere cargar en el día actual si nunca cargó)
+
 ✔ Bloqueo total cuando se exceden los días de gracia
+
 ✔ Validaciones en todos los procesos que registran horas (menú, proyecto, contrato, solicitud)
