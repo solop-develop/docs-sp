@@ -1,4 +1,4 @@
-name: Deploy blog
+name: Deploy Blog
 
 permissions:
   contents: write # to upload release assets
@@ -54,6 +54,59 @@ jobs:
       - name: Compress Build Output (tar.gz)
         run: tar -czvf $PACKAGE_NAME -C dist .
 
+      - name: List Assets
+        run: |
+          tree ./
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v5
+        with:
+          name: $PACKAGE_NAME
+          path: s3-downloads
+          retention-days: 1
+
+
+
+  check-s3-secrets:
+    name: Check if S3 information was set on secrets
+    needs:
+      - build-and-package
+    runs-on: ubuntu-latest
+    outputs:
+      is_have_secrets: ${{ steps.check_s3_secrets_job.outputs.is_have_secrets }}
+    steps:
+      - id: check_s3_secrets_job
+        run: |
+          if [[ "${{ vars.AWS_ACCESS_KEY_ID }}" != "" && \
+                "${{ secrets.AWS_SECRET_ACCESS_KEY }}" != "" ]]; \
+          then
+            echo "Secrets to use S3 are configured in the repo"
+            echo "is_have_secrets=true" >> $GITHUB_OUTPUT
+          else
+            echo "Secrets to use S3 (`vars.AWS_ACCESS_KEY_ID`, `secrets.AWS_SECRET_ACCESS_KEY`) were not configured in the repo"
+            echo "is_have_secrets=false" >> $GITHUB_OUTPUT
+          fi
+
+  upload-s3-space:
+    name: Upload artifacts to S3 space
+    runs-on: ubuntu-latest
+    needs:
+      - check-s3-secrets
+    if: needs.check-s3-secrets.outputs.is_have_secrets == 'true'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v6
+        with:
+          name: $PACKAGE_NAME
+          path: s3-downloads
+
+      - name: List Assets
+        run: |
+          tree s3-downloads
+
       - name: Upload site pack to S3
         uses: BetaHuhn/do-spaces-action@v2
         with:
@@ -64,6 +117,8 @@ jobs:
           source: ${{ env.PACKAGE_NAME }}
           out_dir: 'html/'
           # overwrite: true
+
+
 
   check-digitalocean-secrets:
     name: Check if Digitalocean registry information was set on secrets
@@ -82,7 +137,7 @@ jobs:
             echo "Secrets to use DigitalOcean container registry are configured in the repo"
             echo "is_have_secrets=true" >> $GITHUB_OUTPUT
           else
-            echo "Secrets to use DigitalOcean container registry were not configured in the repo"
+            echo "Secrets to use DigitalOcean container registry (`vars.DIGITALOCEAN_REGISTRY`, `vars.DOCKER_REPO_DOCS_SP`, `secrets.DIGITALOCEAN_ACCESS_TOKEN`) were not configured in the repo"
             echo "is_have_secrets=false" >> $GITHUB_OUTPUT
           fi
 
@@ -93,29 +148,23 @@ jobs:
       - check-digitalocean-secrets
     if: needs.check-digitalocean-secrets.outputs.is_have_secrets == 'true'
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Create download directory
-        run: mkdir -p s3-downloads
+      - name: Download artifacts
+        uses: actions/download-artifact@v6
+        with:
+          name: $PACKAGE_NAME
+          path: s3-downloads
 
-      - name: Download from DigitalOcean Spaces
-        env:
-          AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: List Assets
         run: |
-          echo "Descargando archivos de docs-sp/html..."
-          aws s3 sync \
-            s3://docs-sp/html/ \
-            s3-downloads/ \
-            --endpoint-url https://nyc3.digitaloceanspaces.com \
-            --no-progress
-      
-      - name: show-directory
-        run: ls -alh s3-downloads
+          tree s3-downloads
 
-      - name: Set up Docker Buildx
+      # - name: show-directory
+      #   run: ls -alh s3-downloads
+
+      - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to DigitalOcean Container Registry
