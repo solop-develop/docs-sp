@@ -13,6 +13,9 @@ on:
 jobs:
   deploy-gh-pages:
     runs-on: ubuntu-latest
+    env:
+      BRANCH_NAME: ${{ github.ref_name }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
