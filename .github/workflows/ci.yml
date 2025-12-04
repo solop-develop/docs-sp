@@ -1,14 +1,18 @@
-name: Deploy blog
+name: Continuous Integration Blog
 
 on:
   push:
     branches:
-      - main
-      - experimental
+      - '*'         # matches every branch that doesn't contain a '/'
+      - '*/*'       # matches every branch containing a single '/'
+      - '**'        # matches every branch
 
 jobs:
   deploy-gh-pages:
     runs-on: ubuntu-latest
+    env:
+      BRANCH_NAME: ${{ github.ref_name }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,9 +38,3 @@ jobs:
         env:
           NODE_OPTIONS: --max_old_space_size=8192
         run: pnpm run build:webpack
-
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: dist
