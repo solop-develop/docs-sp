@@ -2,6 +2,20 @@ import { defineUserConfig } from "@vuepress/cli";
 import theme from "./theme";
 import { searchPlugin } from '@vuepress/plugin-search'
 import { path } from "@vuepress/utils";
+import * as fs from 'fs'; // Necesario para verificar si el archivo `.env` existe
+import * as dotenv from 'dotenv'; // Necesario para cargar el archivo de variables de entorno
+
+const envPath = path.resolve(__dirname, '../../.env'); 
+// Verifica si el archivo .env existe
+if (fs.existsSync(envPath)) {
+    console.log(`Cargando variables desde: ${envPath}`);
+
+    // 2. Carga las variables desde el archivo .env
+    // Nota: Por defecto, dotenv NO sobrescribe variables de entorno ya existentes.
+    dotenv.config({ path: envPath }); 
+} else {
+    console.log(`El archivo .env no existe en ${envPath}. Usando variables del entorno.`);
+}
 
 // Configuración dinámica del base path según la rama
 // TODAS las ramas usan su propio base path (incluyendo la rama principal)
