@@ -2,4 +2,4 @@
 User-agent:*
 Disallow:
 
-Sitemap: https://ayuda.solopapp.com/sitemap.xml
+Sitemap: https://ayuda.solopapp.com/main/sitemap.xml

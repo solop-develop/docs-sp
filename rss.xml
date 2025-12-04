@@ -1,14 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="https://ayuda.solopapp.com/rss.xsl"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="https://ayuda.solopapp.com/main/rss.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <atom:link href="https://ayuda.solopapp.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://ayuda.solopapp.com/main/rss.xml" rel="self" type="application/rss+xml"/>
     <title></title>
-    <link>https://ayuda.solopapp.com/</link>
+    <link>https://ayuda.solopapp.com/main/</link>
     <description>Página oficial de documentación Solop ERP</description>
     <language>es-ES</language>
-    <pubDate>Thu, 16 Oct 2025 15:56:34 GMT</pubDate>
-    <lastBuildDate>Thu, 16 Oct 2025 15:56:34 GMT</lastBuildDate>
+    <pubDate>Thu, 04 Dec 2025 16:03:35 GMT</pubDate>
+    <lastBuildDate>Thu, 04 Dec 2025 16:03:35 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <item>
+      <title></title>
+      <link>https://ayuda.solopapp.com/main/docs/test-page/</link>
+      <guid>https://ayuda.solopapp.com/main/docs/test-page/</guid>
+      <source url="https://ayuda.solopapp.com/main/rss.xml"></source>
+      <description>Página de Prueba - Nuevo Sitio Lorem Ipsum is simply dummy text of the printing and typesetting industry.</description>
+      <pubDate>Fri, 07 Nov 2025 22:18:22 GMT</pubDate>
+      <content:encoded><![CDATA[<h3> Página de Prueba - Nuevo Sitio</h3>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+]]></content:encoded>
+    </item>
   </channel>
 </rss>

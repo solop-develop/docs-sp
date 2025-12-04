@@ -1,8 +1,20 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "",
-  "home_page_url": "https://ayuda.solopapp.com/",
-  "feed_url": "https://ayuda.solopapp.com/feed.json",
+  "home_page_url": "https://ayuda.solopapp.com/main/",
+  "feed_url": "https://ayuda.solopapp.com/main/feed.json",
   "description": "Página oficial de documentación Solop ERP",
-  "items": []
+  "items": [
+    {
+      "title": "",
+      "url": "https://ayuda.solopapp.com/main/docs/test-page/",
+      "id": "https://ayuda.solopapp.com/main/docs/test-page/",
+      "summary": "Página de Prueba - Nuevo Sitio Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "content_html": "<h3> Página de Prueba - Nuevo Sitio</h3>\n<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>\n",
+      "date_published": "2025-11-07T22:18:22.000Z",
+      "date_modified": "2025-11-07T22:18:22.000Z",
+      "authors": [],
+      "tags": []
+    }
+  ]
 }
