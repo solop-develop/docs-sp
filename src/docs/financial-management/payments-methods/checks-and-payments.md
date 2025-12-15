@@ -308,13 +308,12 @@ De esta manera, el sistema asegura la trazabilidad completa del cheque y permite
 
 ### Flujo general del proceso
 
-   1. Cheque recibido en el local → queda registrado en la caja como "cheque en cartera".
-
-   2. Envío de remesa desde el local → se realiza un depósito de caja, que genera los documentos de retiro y el movimiento hacia la "remesa en tránsito".
-
-   3. Cheque en tránsito → queda en estado pendiente hasta que la administración lo reciba.
-
-   4. Recepción en administración → mediante depósito de caja se confirma la entrada del cheque en la caja de administración (ej. "Cheques en cartera – Administración").
+|            Etapa            |                    Descripción                           |
+| --------------------------- | -------------------------------------------------------- |
+| Cheque Recibido en el local |       Ingresado como Cheque en Cartera – Local           |
+|  Envío a remesa en tránsito | Mediante Depósito de Caja. Se genera retiro en el local e ingreso en la cuenta de remesas|
+|      Cheque en tránsito     |       Queda pendiente de recepción por administración    |
+| Recepción en administración | Depósito de Caja desde la Org administrativa. Se ingresa a Cheques en Cartera – Administración |
 
 ### Pasos del proceso
 
