@@ -65,6 +65,8 @@ jobs:
           out_dir: 'html/'
           # overwrite: true
 
+
+
   check-digitalocean-secrets:
     name: Check if Digitalocean registry information was set on secrets
     needs:
@@ -93,7 +95,6 @@ jobs:
       - check-digitalocean-secrets
     if: needs.check-digitalocean-secrets.outputs.is_have_secrets == 'true'
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -111,7 +112,7 @@ jobs:
             s3-downloads/ \
             --endpoint-url https://nyc3.digitaloceanspaces.com \
             --no-progress
-      
+
       - name: show-directory
         run: ls -alh s3-downloads
 
