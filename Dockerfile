@@ -21,8 +21,8 @@ COPY configure-base-paths.sh /tmp/configure-base-paths.sh
 
 # Dar permisos de ejecución y ejecutar el script
 RUN chmod +x /tmp/configure-base-paths.sh && \
-    /tmp/configure-base-paths.sh && \
-    rm /tmp/configure-base-paths.sh
+	/tmp/configure-base-paths.sh && \
+	rm /tmp/configure-base-paths.sh
 
 # Exponer el puerto 80
 EXPOSE 80
