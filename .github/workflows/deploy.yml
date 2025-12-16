@@ -1,4 +1,4 @@
-name: Deploy blog
+name: Deploy on GH-Pages
 
 permissions:
   contents: write # to upload release assets

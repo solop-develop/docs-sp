@@ -1,4 +1,4 @@
-name: Deploy blog
+name: Deploy with Docker Image
 
 permissions:
   contents: write # to upload release assets
