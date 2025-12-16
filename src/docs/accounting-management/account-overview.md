@@ -10,7 +10,7 @@ A continuación se explicará la filosofía de la contabilidad en Solop ERP. Se 
 
 No se va a explicar aquí detalladamente cómo funciona la Contabilidad ni cómo manejarla porque ése será el enfoque de otros capítulos.
 
-La contabilidad de Solop ERP está altamente automatizada; eso concretamente significa que al ejecutarse cualquiera de los siguientes Procesos/Documentos Solop ERP automáticamente crea los asientos contables, realizando cálculos de costos, impuestos, etc.
+La contabilidad de [Solop ERP](https://solopsoftware.com/es/inicio/) está altamente automatizada; eso concretamente significa que al ejecutarse cualquiera de los siguientes Procesos/Documentos Solop ERP automáticamente crea los asientos contables, realizando cálculos de costos, impuestos, etc.
 
 * Compras
 * Ventas
@@ -69,5 +69,6 @@ Esto trae como consecuencia que los reportes contables en Solop ERP sean un resu
 ## Cuentas Puente
 
 Debido a la alta automatización con la que cuenta Solop ERP permitiendo que cada Documento genere el impacto contable que le corresponde, esto ocasiona que en varios de los procesos normales empresariales, Solop ERP maneje Cuentas Puente que irán regularizando lo que "El Documento" en sí sabe que puede aplicar contablemente. Esto permite que siempre se cuente con una realidad exacta, permitiendo cada una de las acciones que pueden ser posibles de darse en el ámbito empresarial, puedan ser reflejada automáticamente en la contabilidad y no requiera de ningún ajuste posterior ni control de que ocurra alguna acción adicional para poderlo contabilizar.
+
 
 Estas Cuentas Puente serán completamente controladas y verificadas con reportes auxiliares que explicarán en términos más simples, cómo se ocasiona cierto saldo en cada una de ellas.
