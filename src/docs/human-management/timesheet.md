@@ -76,17 +76,19 @@ Se debe configurar:
 
 La carga se realiza mediante el proceso Carga de Horas, accesible desde:
 
-- Menú principal
+- Menú principal (Proceso: Registrar Horas Trabajadas)
 
-- Ventana Proyecto
+- Proyecto
 
-- Ventana Contrato de Servicios
+- Contrato de Servicios
+
+- Solicityd
 
 Campos principales:
 
 - Usuario (contexto)
 
-- Fecha
+- Fecha sugerida
 
 - Cantidad de horas
 
@@ -96,33 +98,41 @@ Campos principales:
 
 - Proyecto / Cliente / Contrato
 
+### Fecha Sugerida (Comportamiento)
+
+* El sistema sugiere la fecha siguiente a la última hora cargada por el usuario
+
+* Esto aplica desde todos los accesos (Proyecto, Contrato, Solicitud)
+
+* Si el usuario nunca cargó horas, se sugiere fecha actual.
+
 ## Restricciones de Carga
 
-- Caso 1: Usuario sin carga → debe realizar primer registro.
+- **Caso 1** (Primer Registro): Usuario sin carga → debe realizar primer registro.
 
 ![Campo](/assets/img/docs/human-management/hum-human-image46.png)
 
 Mensaje del Sistema: El usuario no tiene registro de horas hasta el momento, por favor registre las horas trabajadas.
 
-- Caso 2: Carga incompleta → error si no cumple con mínimo configurado.
+- **Caso 2** (Mínimo Diario): Carga incompleta → error si no cumple con mínimo configurado.
 
 Mensaje del SIstema: La cantidad diaria de registro de tiempo no cumple con el mínimo establecido en el último registro, por favor complete antes de registrar otro día.
 
-- Caso 3: Carga fuera de orden → no se permite cargar hoy si ayer no fue cargado.
+- **Caso 3** (Orden cronológico): Carga fuera de orden → no se permite cargar hoy si ayer no fue cargado.
 
 Mensaje del Sistema: Carga de horas incorrecta, las horas deben cargarse en orden cronológico evitando saltarse los días
 
-- Caso 4: Tiempo de gracia excedido → bloqueo total hasta cargar horas faltantes.
+- **Caso 4** (bloqueo por días de gracia): Tiempo de gracia excedido → bloqueo total hasta cargar horas faltantes.
 
 Mensaje del Sistema: Tiempo de gracia excedido, por favor cargue su tiempo de trabajo.
 
 ## Modificación de Horas
 
-- esde Mi Perfil → Mis Horas o ventana Usuario.
+- Desde Mi Perfil → Mis Horas o ventana Usuario.
 
 - Se puede modificar o borrar registros.
 
-- Los registros confirmados no pueden modificarse ni eliminarse.
+- Los registros **confirmados** no pueden modificarse ni eliminarse.
 
 - En Asignación de Recurso (Resumen) se visualizan registros agrupados por fecha.
 
